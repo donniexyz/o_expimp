@@ -4,17 +4,21 @@
 #
 # Input:
 #    params.dat     oracle parameters is on parameter file
+#    $CWDBOWNER     oracle user id on environment
+#    $CWDBPASWD     oracle password on enviroment
 #    EXP.lst        list of tables to export on file
-#    $CWDBOWNER     oracle user id
-#    $CWDBPASWD     oracle password
-#
+#                   format:
+#                          {TableName} [dumpfiledest|.] [wherequery]
+#                   example:
+#                          EMP
+#                          EMP   EMP_exp
+#                          EMP   EMP_exp  \"WHERE dept_code='CIA'\"
+#                          EMP   .  \"WHERE dept_code='CIA'\"
 #
 # Output:
 #   processed.${stmp}.lst       List of exported tables
 #   ${stmp}-DMP/                DMP directory destination
 #   ${stmp}-LOG/                Log directory destination
-#
-#
 #
 #
 
