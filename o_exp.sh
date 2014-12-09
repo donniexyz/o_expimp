@@ -2,11 +2,14 @@
 #
 # This scripts export oracle tables using export command: exp
 #
+# parameters:
+#       $ o_exp [exportlistfile=EXP.lst]
+#
 # Input:
 #    params.dat     oracle parameters is on parameter file
 #    $CWDBOWNER     oracle user id on environment
 #    $CWDBPASWD     oracle password on enviroment
-#    EXP.lst        list of tables to export on file
+#    exportlistfile list of tables to export on file
 #                   format:
 #                          {TableName} [dumpfiledest|.] [wherequery]
 #                   example:
@@ -37,7 +40,14 @@ echo "Preparation.."
 stmp=$(date '+%Y%m%d-%H%M%S')
 logdir=$(echo "${stmp}-LOG")
 dmpdir=$(echo "${stmp}-DMP")
-explist=EXP.lst
+
+explist=$1
+if [[ -z ${explist} ]] 
+then
+  explist=EXP.lst
+  echo ""
+  echo "export list is not specified, using default: ${explist}"
+fi
 
 processed=processed.${stmp}.lst
 processing=processing.${stmp}.lst
